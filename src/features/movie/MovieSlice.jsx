@@ -6,6 +6,8 @@ const initialState = {
   movies: [],
   loading: false,
   error: "",
+  movie: {},
+  currMovieId: null,
 };
 
 export const fetchMovie = createAsyncThunk(
@@ -43,7 +45,15 @@ export const fetchMovie = createAsyncThunk(
 const MovieSlice = createSlice({
   name: "movies",
   initialState,
-  reducers: {},
+  reducers: {
+    getMovieId(state, action) {
+      state.currMovieId =
+        action.payload === state.currMovieId ? null : action.payload;
+    },
+    getMovieDetails(state, action) {
+      state.movie = action.payload;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(fetchMovie.pending, (state) => {
@@ -61,5 +71,7 @@ const MovieSlice = createSlice({
         state.error = "Movie Not Found!";
       }),
 });
+
+export const { getMovieDetails, getMovieId } = MovieSlice.actions;
 
 export default MovieSlice.reducer;

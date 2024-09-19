@@ -9,13 +9,14 @@ const contSty = {
 
 const starcontSty = {
   display: "flex",
-  gap: "4px",
+  // gap: "4px",
 };
 
 const paraSty = {
   fontSize: "16px",
   lineHeight: "1",
   margin: "0",
+  color: "#fcc219",
 };
 
 function Star({ onSetRating }) {

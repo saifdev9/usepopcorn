@@ -1,5 +1,9 @@
+import { useDispatch } from "react-redux";
+import { removeFromWatch } from "./WatchedSlice";
+
 /* eslint-disable react/prop-types */
 function WatchMovie({ movie }) {
+  const dispatch = useDispatch();
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -17,6 +21,13 @@ function WatchMovie({ movie }) {
           <span>⏳</span>
           <span>{movie.runtime} min</span>
         </p>
+
+        <button
+          onClick={() => dispatch(removeFromWatch(movie?.imdbID))}
+          className="btn-delete"
+        >
+          X
+        </button>
       </div>
     </li>
   );
