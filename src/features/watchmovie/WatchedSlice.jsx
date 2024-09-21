@@ -2,7 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  WatchedMovies: [],
+  // WatchedMovies: [],
+  WatchedMovies: JSON.parse(localStorage.getItem("movies")) || [],
 };
 
 const WatchedSlice = createSlice({
@@ -11,10 +12,17 @@ const WatchedSlice = createSlice({
   reducers: {
     addToWatch(state, action) {
       state.WatchedMovies.push(action.payload);
+      localStorage.setItem("movies", JSON.stringify(state.WatchedMovies));
     },
     removeFromWatch(state, action) {
       state.WatchedMovies = state.WatchedMovies.filter(
         (movie) => movie.imdbID !== action.payload
+      );
+      localStorage.setItem(
+        "movies",
+        JSON.stringify(
+          state.WatchedMovies.filter((movie) => movie.imdbID !== action.payload)
+        )
       );
     },
   },
